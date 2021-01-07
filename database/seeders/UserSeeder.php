@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
 
             // Enroll them into this brand
             $user_ids = $users->pluck('id')->toArray();
-            $brand->addUser($user_ids);
+            $brand->addMember($user_ids);
         }
     }
 }

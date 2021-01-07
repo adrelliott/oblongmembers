@@ -17,6 +17,7 @@ class CreateBrandUserTable extends Migration
             $table->id();
             $table->foreignId('brand_id')->index()->constrained();
             $table->foreignId('user_id')->index()->constrained();
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
     }

@@ -16,14 +16,42 @@ class Brand extends Model
     // ------------------
 
 
+    // Create admin users. Can pass single ID or array of IDs
+    public function addAdminUser($user_id)
+    {
+        return $this->users()->attach($user_id, ['is_admin']);
+    }
+
+    // remove admin users. Can pass single ID or array of IDs
+    public function removeAdminUser($user_id)
+    {
+        return $this->users()->detach($user_id);
+    }
+
+    // Make existing user an admin. Can pass single ID or array of IDs
+    public function promoteUserToAdmin($user_id)
+    {
+        return $this->users()->updateExistingPivot($user_id, [
+            'is_admin' => true
+        ]);
+    }
+
+    // Knock existing admin back down to user. Can pass single ID or array of IDs
+    public function demoteAdminToUser($user_id)
+    {
+        return $this->users()->updateExistingPivot($user_id, [
+            'is_admin' => false
+        ]);
+    }
+
     // Enroll users. Can pass single ID or array of IDs
-    public function addUser($user_id)
+    public function addMember($user_id)
     {
         return $this->users()->attach($user_id);
     }
 
     // Unenroll users. Can pass single ID or array of IDs
-    public function removeUser($user_id)
+    public function removeMember($user_id)
     {
         return $this->users()->detach($user_id);
     }
